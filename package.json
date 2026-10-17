@@ -1,0 +1,9 @@
+{
+  "name": "sangia-netlify-backend",
+  "private": true,
+  "version": "2.2.0",
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  }
+}

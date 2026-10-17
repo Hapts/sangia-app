@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+  <meta name="theme-color" content="#162139"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+  <meta name="apple-mobile-web-app-title" content="Săn Giá"/>
+  <meta name="description" content="So sánh giá điện thoại theo màu và dung lượng tại 7 nhà bán lẻ Việt Nam"/>
+  <link rel="manifest" href="/manifest.webmanifest"/>
+  <link rel="apple-touch-icon" href="/icons/icon-192.png"/>
+  <link rel="icon" type="image/png" href="/icons/icon-192.png"/>
+  <link rel="stylesheet" href="/app.css"/>
+  <title>Săn Giá — Chọn đúng máy. Mua đúng giá.</title>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <a class="brand" href="/" id="brandLink" aria-label="Trang chủ Săn Giá">
+        <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><rect x="6" y="2.5" width="12" height="19" rx="2.8"/><path d="M10 5h4M10 18.3h4"/><path d="m8.7 12 2.3 2.3 4.3-5"/></svg></span>
+        <span>SĂN<span class="brand-accent">GIÁ</span><small>PHONE PRICE FINDER</small></span>
+      </a>
+      <div class="side-label">KHÁM PHÁ</div>
+      <nav class="sidebar-nav" aria-label="Điều hướng chính">
+        <button data-view="compare" class="nav-item selected"><span class="nav-ico">⊞</span> So sánh giá <span class="nav-arrow">›</span></button>
+        <button data-view="new" class="nav-item"><span class="nav-ico">✦</span> Điện thoại mới</button>
+        <button data-view="saved" class="nav-item"><span class="nav-ico">♡</span> Đã lưu <span id="savedCount" class="count-pill">0</span></button>
+      </nav>
+      <div class="side-label section-spacer">TÌM THEO HÃNG</div>
+      <div id="sidebarBrands" class="brand-list"></div>
+      <div class="sidebar-bottom">
+        <div class="tip-card"><span class="tip-icon">✦</span><strong>Mẹo mua sắm</strong><p>Chọn đúng dung lượng, màu và nguồn gốc máy trước khi so giá.</p></div>
+        <button id="installSide" class="install-side">↓ <span>Cài ứng dụng Săn Giá</span></button>
+        <p class="side-foot">Made for smart shopping <span>✳</span></p>
+      </div>
+    </aside>
+    <main class="main">
+      <header class="topbar">
+        <div class="header-greeting"><span class="eyebrow">BẠN ĐANG Ở ĐÚNG NƠI</span><h1>So giá thông minh<span class="dot">.</span></h1><p>Tìm đúng điện thoại, đối chiếu giá từ 7 cửa hàng.</p></div>
+        <div class="header-actions"><span class="live-point"><i></i> <span id="engineState">Đang kiểm tra nguồn</span></span><button id="installTop" class="header-icon" aria-label="Cài ứng dụng" title="Cài ứng dụng">↓</button><button id="aboutBtn" class="avatar" title="Cách hoạt động">?</button></div>
+      </header>
+      <div class="content">
+        <div class="search-panel">
+          <div class="search-topline"><span><span class="sparkle">✦</span> TÌM KIẾM ĐIỆN THOẠI</span><span class="keyboard-hint">Gõ hãng hoặc tên máy để xem gợi ý</span></div>
+          <div class="search-wrap" id="searchWrap">
+            <div class="search-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.3"/><path d="m16 16 4.5 4.5"/></svg></div>
+            <input id="searchInput" autocomplete="off" autocapitalize="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="suggestions" placeholder="Tìm iPhone, Samsung, Xiaomi..."/>
+            <button id="clearSearch" class="clear-search hidden" aria-label="Xoá nội dung">×</button>
+            <span class="keycap">⌘ K</span>
+            <button id="searchSubmit" class="search-button">Tìm giá <span>↗</span></button>
+            <div id="suggestions" class="suggestions hidden" role="listbox"></div>
+          </div>
+          <div class="quick-row"><span class="quick-label">PHỔ BIẾN:</span><div id="trendingChips" class="quick-chips"></div></div>
+        </div>
+        <div class="mode-alert" id="modeAlert"><span class="mode-dot"></span><div><strong id="modeTitle">Chế độ kiểm tra giá từ nguồn bán</strong><span id="modeDesc">Chỉ hiển thị giá đọc được và xác minh từ cửa hàng.</span></div><button id="modeToggle" class="hidden">Đang kiểm tra giá thật</button></div>
+        <section id="compareView" class="view active" aria-label="So sánh giá">
+          <div class="hero-panel">
+            <div class="hero-content">
+              <div class="hero-top"><span class="hero-tag">✳ TÌM ĐÚNG, MUA HỜI</span><span class="hero-tag subtle" id="heroCheck">7 website theo dõi</span></div>
+              <div class="hero-text"><span class="hero-kicker">BẢNG GIÁ ĐIỆN THOẠI</span><h2 id="heroPhone">iPhone 17 Pro Max</h2><p>Giá từ nhiều nhà bán lẻ. Chọn màu sắc, dung lượng và so sánh ngay.</p></div>
+              <div class="hero-bottom"><span class="hero-avatars"><i>W</i><i>D</i><i>C</i><i>+</i></span><span>Đối chiếu giá trước khi quyết định</span></div>
+            </div>
+            <div class="hero-art" aria-hidden="true"><div class="hero-orbit"></div><div class="back-phone"><span class="cam c1"></span><span class="cam c2"></span><span class="cam c3"></span><span class="phone-shine"></span></div><div class="front-phone"><span class="front-pill"></span><div class="screen-aura"></div><span class="screen-price">₫</span><span class="screen-glow"></span></div><div class="floating-tag">✦ SMART DEAL</div></div>
+          </div>
+          <div class="section-head filters-head"><div><span class="eyebrow dark">TÙY CHỈNH PHIÊN BẢN</span><h3>Chọn chính xác máy bạn muốn</h3></div><button id="savePhone" class="outline-btn" title="Lưu điện thoại"><span id="saveHeart">♡</span> <span id="saveText">Lưu máy</span></button></div>
+          <div class="filter-panel"><div class="filter-group"><div class="filter-label">DUNG LƯỢNG <span>01</span></div><div id="capacityOptions" class="pill-options"></div></div><div class="filter-separator"></div><div class="filter-group grow"><div class="filter-label">MÀU SẮC <span>02</span></div><div id="colorOptions" class="pill-options color-options"></div></div><div class="filter-separator"></div><div class="filter-group condition-group"><div class="filter-label">PHIÊN BẢN <span>03</span></div><select id="conditionFilter"><option value="all" selected>Tất cả nguồn hàng</option><option value="vn">Chính hãng VN</option><option value="import">Hàng quốc tế / nhập khẩu</option><option value="unknown">Chưa xác định nguồn</option></select></div></div>
+          <div id="resultState"></div>
+          <section class="shops-panel" aria-labelledby="shopsTitle"><div class="shops-header"><div><span class="eyebrow dark">MỞ NHANH 7 CỬA HÀNG</span><h3 id="shopsTitle">Tra cứu trực tiếp từ nguồn</h3></div><p>Không có giá tự động? Những liên kết này vẫn giúp bạn kiểm tra ngay tại cửa hàng.</p></div><div class="shop-links" id="shopLinks"></div></section>
+          <div id="resultsContent">
+            <div class="stats-grid"><div class="stat-card highlight"><div class="stat-label">GIÁ THẤP NHẤT <span>↘</span></div><div class="stat-value" id="minPrice">—</div><div class="stat-caption" id="minStore">Chưa có thông tin</div><div class="stat-bubble">↘</div></div><div class="stat-card"><div class="stat-label">CHÊNH LỆCH GIÁ <span>↗</span></div><div class="stat-value" id="priceSpread">—</div><div class="stat-caption">Giữa giá cao nhất và thấp nhất</div></div><div class="stat-card"><div class="stat-label">CỬA HÀNG CÓ GIÁ <span>↗</span></div><div class="stat-value" id="storesCount">— <small>/ 7</small></div><div class="stat-caption" id="lastUpdated">Chưa đồng bộ dữ liệu</div></div></div>
+            <div class="ranking-head"><div><span class="eyebrow dark">XẾP HẠNG GIÁ BÁN</span><h3>Ở đâu đang có giá tốt nhất?</h3><p>Chỉ hiển thị cửa hàng tìm được giá phù hợp với lựa chọn.</p></div><div class="rank-actions"><button id="refreshBtn" class="text-button" title="Kiểm tra lại giá">⟳ Làm mới</button><select id="sortFilter" aria-label="Sắp xếp"><option value="low">Giá thấp → cao</option><option value="high">Giá cao → thấp</option><option value="store">Tên cửa hàng A–Z</option></select></div></div>
+            <div class="rank-list" id="rankList"></div>
+            <div class="foot-note"><span>ⓘ</span> <p>Giá chỉ được ghi nhận khi nguồn có thể đọc và xác minh. Màu không xác định sẽ không được gán giá tuỳ ý. Giá, khuyến mại và tồn kho cần kiểm tra lại tại nhà bán trước khi mua.</p></div>
+          </div>
+        </section>
+        <section id="newView" class="view"><div class="section-head"><div><span class="eyebrow dark">THƯ VIỆN ĐIỆN THOẠI</span><h3>Khám phá điện thoại gần đây</h3><p>Danh mục gợi ý được bổ sung khi tìm thấy mẫu mới.</p></div></div><div class="device-grid" id="newDevices"></div></section>
+        <section id="savedView" class="view"><div class="section-head"><div><span class="eyebrow dark">BỘ SƯU TẬP CỦA BẠN</span><h3>Điện thoại đã lưu</h3><p>Lưu những máy bạn quan tâm và so giá bất cứ lúc nào.</p></div></div><div class="device-grid" id="savedDevices"></div></section>
+        <footer><strong>SĂN GIÁ <span>✳</span></strong><span>So sánh có cơ sở, mua sắm tự tin.</span><span>© 2026 Săn Giá · Dữ liệu giá xác minh từ cửa hàng</span></footer>
+      </div>
+    </main>
+  </div>
+  <nav class="mobile-nav" aria-label="Điều hướng thiết bị di động"><button data-mobile-view="compare" class="active"><span>⊞</span>So giá</button><button data-mobile-view="new"><span>✦</span>Mẫu mới</button><button data-mobile-view="saved"><span>♡</span>Đã lưu</button><button id="installMobile"><span>↓</span>Cài app</button></nav>
+  <div id="toast" class="toast" role="status"></div>
+  <dialog id="infoDialog"><button class="dialog-close" id="closeDialog" aria-label="Đóng">×</button><span class="dialog-star">✳</span><h3>Săn Giá hoạt động thế nào?</h3><p>Trang tìm kiếm sản phẩm từ 7 cửa hàng, đọc giá có thể xác minh trên trang sản phẩm, rồi xếp hạng những phiên bản phù hợp với bộ lọc.</p><ul><li><strong>Giá trực tiếp:</strong> cần máy chủ chạy và nguồn tìm kiếm truy cập được; Serper API key giúp kết quả đầy đủ hơn.</li><li><strong>Đúng phiên bản:</strong> không gộp giá hàng VN với hàng nhập, máy mới với máy cũ.</li><li><strong>Theo màu:</strong> chỉ ghi nhận giá riêng khi nguồn thực sự xác nhận màu tương ứng.</li><li><strong>Ứng dụng:</strong> Android cài bằng Chrome; iPhone cài từ Safari › Chia sẻ › Thêm vào Màn hình chính, sau khi triển khai HTTPS.</li></ul><button id="closeDialog2" class="search-button dialog-okay">Đã hiểu</button></dialog>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
